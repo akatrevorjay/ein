@@ -1,5 +1,3 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -45,6 +43,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+.hypothesis/
 
 # Translations
 *.mo
@@ -59,23 +58,5 @@ docs/_build/
 # PyBuilder
 target/
 
-# PyCharm
-.idea/
-
-# vkproxy
-/vkproxy.sqlite
-
-# local
-/pillar/local.sls
-
-# dev
-.ipynb_checkpoints/
-/.project
-/.settings
-/.pydevproject
-.ropeproject
-
-# trevorj
-/_ex/
-/_testing/
-/_old/
+#Ipython Notebook
+.ipynb_checkpoints
