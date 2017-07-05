@@ -69,7 +69,7 @@ class TestFlaskConfig(object):
 
         assert config.app_name == app_name
         assert config.root_path == root_path
-        assert config.init_defaults == defaults
+        assert config.defaults == defaults
         for k, v in defaults.items():
             assert getattr(config, k.upper()) == v
         assert config.as_dict() == defaults
@@ -90,7 +90,7 @@ class TestFlaskConfig(object):
 
         assert config.app_name == app_name
         assert config.root_path == root_path
-        assert config.init_defaults == defaults
+        assert config.defaults == defaults
         for k, v in defaults.items():
             assert getattr(config, k.upper()) == v
         assert config.as_dict() == defaults

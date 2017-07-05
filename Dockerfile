@@ -28,7 +28,16 @@ RUN set -exv \
 ADD requirements requirements
 RUN install-reqs requirements/*
 
-ADD setup.py MANIFEST.in README.md pytest.ini setup.cfg setup.py tox.ini ./
+ADD setup.cfg setup.py MANIFEST.in README.md ./
+
+ARG MEINCONF_VERSION=0.0.1dev
+
+ENV PBR_VERSION=$MEINCONF_VERSION
+
+RUN fake-python-package . 'meinconf' \
+ && pip install -e .
+
+ADD pytest.ini tox.ini ./
 ADD meinconf meinconf
 ADD tests tests
 
