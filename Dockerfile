@@ -30,7 +30,7 @@ RUN set -exv \
 ADD requirements requirements
 RUN install-reqs requirements/*
 
-ADD setup.cfg setup.py MANIFEST.in README.md ./
+ADD setup.cfg setup.py MANIFEST.in README.* ./
 
 ARG MEINCONF_VERSION=0.0.1dev
 
