@@ -6,7 +6,7 @@ import uninhibited
 from .config import Config
 
 
-@attr.s
+@attr.s(repr=False)
 class EventfulConfig(Config):
     """Glue to make configuration dynamic by sending events when keys change.
     """
