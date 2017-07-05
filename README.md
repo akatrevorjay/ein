@@ -13,4 +13,4 @@ TODO
 
 - Move to explicit usage that accept either files or strings, *not* both.
 - Documentation
-- Tests need written.
+- Import work using chainmaps
