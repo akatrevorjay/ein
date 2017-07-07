@@ -12,7 +12,9 @@ class EventfulConfig(Config):
     """
 
     on_change = attr.ib(default=attr.Factory(uninhibited.Event))
-    on_key_change = attr.ib(default=attr.Factory(uninhibited.Dispatch))
+    on_key_change = attr.ib(default=attr.Factory(
+        lambda: uninhibited.Dispatch(create_events_on_access=True),
+    ))
 
     def __setitem__(self, key, value):
         super(EventfulConfig, self).__setitem__(key, value)
