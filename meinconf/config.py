@@ -99,7 +99,7 @@ class Config(_flask.Config):
     # Backwards compat
     def from_app(self, *args, **kwargs):
         warnings.warn(
-            '{cls_nane}.from_app is deprecated, use Config.configure'.format(
+            '{cls_name}.from_app is deprecated, use Config.configure'.format(
                 cls_name=self.__class__.__name__,
             ), DeprecationWarning)
         return self.configure(*args, **kwargs)
