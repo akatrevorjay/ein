@@ -96,14 +96,6 @@ class Config(_flask.Config):
         if from_envvars:
             self.from_envvars(from_envvars_prefix)
 
-    # Backwards compat
-    def from_app(self, *args, **kwargs):
-        warnings.warn(
-            '{cls_name}.from_app is deprecated, use Config.configure'.format(
-                cls_name=self.__class__.__name__,
-            ), DeprecationWarning)
-        return self.configure(*args, **kwargs)
-
     def from_default_config(self, module_name=None, silent=False):
         if not module_name:
             module_name = DEFAULT_CONFIG_MODULE_NAME
@@ -393,55 +385,4 @@ class Config(_flask.Config):
 
     def as_dict(self):
         return {k: v for k, v in self.items() if k.isupper()}
-
-    """ Deprecated framework-specific methods """
-
-    @classmethod
-    def __configure_flask_app(cls, app, **kwargs):
-        """
-        Emulates deprecated configure_flask_app for backwards compatibility by
-        instantiating a FlaskConfig object using the given app.
-
-        :param flask.Flask app: Flask application
-        :param dict kwargs: Keyword arguments to pass to FlaskConfig.configure()
-        :return FlaskConfig: FlaskConfig instance created
-        """
-        self = FlaskConfig(app=app)
-        self.configure(**kwargs)
-        self.configure_flask_app()
-        return self
-
-    @classmethod
-    def configure_flask_app(cls, app, **kwargs):
-        """
-        DEPRECATED: Framework specific methods have been moved to their own
-        respective classes. See :class:`FlaskConfig`.
-
-        :param flask.Flask app: Flask application
-        :param dict kwargs: Keyword arguments to pass to FlaskConfig.configure()
-        :return FlaskConfig: FlaskConfig instance created
-        """
-        warnings.warn(
-            '{cls_name}.configure_flask_app is deprecated. '
-            'Flask-specific methods have been moved to FlaskConfig.'.format(
-                cls_name=cls.__name__,
-            ), DeprecationWarning)
-        return cls.__configure_flask_app(app, **kwargs)
-
-    @classmethod
-    def from_flask_app(cls, app, **kwargs):
-        """
-        DEPRECATED: Framework specific methods have been moved to their own
-        respective classes. See :class:`FlaskConfig`.
-
-        :param flask.Flask app: Flask application
-        :param dict kwargs: Keyword arguments to pass to FlaskConfig.configure()
-        :return FlaskConfig: FlaskConfig instance created
-        """
-        warnings.warn(
-            '{cls_name}.from_flask_app is deprecated. '
-            'Flask-specific methods have been moved to FlaskConfig.'.format(
-                cls_name=cls.__name__,
-            ), DeprecationWarning)
-        return cls.__configure_flask_app(app, **kwargs)
 
