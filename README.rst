@@ -1,4 +1,4 @@
-meinconf
+ein
 ========
 
 Generic configuration library for any app.
@@ -9,7 +9,7 @@ Tested with Python 2.7, 3.4, 3.5, 3.6.
 
 |Test Status| |Coverage Status| |Documentation Status|
 
--  PyPi: https://pypi.python.org/pypi/meinconf
+-  PyPi: https://pypi.python.org/pypi/ein
 
 
 TODO
@@ -25,7 +25,7 @@ Installation
 
 .. code:: sh
 
-    pip install meinconf
+    pip install ein
 
 
 Running tests
@@ -40,10 +40,10 @@ Tox is used to handle testing multiple python versions.
     tox
 
 
-.. |Test Status| image:: https://circleci.com/gh/akatrevorjay/meinconf.svg?style=svg
-   :target: https://circleci.com/gh/akatrevorjay/meinconf
-.. |Coverage Status| image:: https://coveralls.io/repos/akatrevorjay/meinconf/badge.svg?branch=develop&service=github
-   :target: https://coveralls.io/github/akatrevorjay/meinconf?branch=develop
-.. |Documentation Status| image:: https://readthedocs.org/projects/meinconf/badge/?version=latest
-   :target: http://meinconf.readthedocs.org/en/latest/?badge=latest
+.. |Test Status| image:: https://circleci.com/gh/akatrevorjay/ein.svg?style=svg
+   :target: https://circleci.com/gh/akatrevorjay/ein
+.. |Coverage Status| image:: https://coveralls.io/repos/akatrevorjay/ein/badge.svg?branch=develop&service=github
+   :target: https://coveralls.io/github/akatrevorjay/ein?branch=develop
+.. |Documentation Status| image:: https://readthedocs.org/projects/ein/badge/?version=latest
+   :target: http://ein.readthedocs.org/en/latest/?badge=latest
 

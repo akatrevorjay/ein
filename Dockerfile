@@ -32,15 +32,15 @@ RUN install-reqs requirements/*
 
 ADD setup.cfg setup.py MANIFEST.in README.* ./
 
-ARG MEINCONF_VERSION=0.0.1dev
+ARG EIN_VERSION=0.0.1dev
 
-ENV PBR_VERSION=$MEINCONF_VERSION
+ENV PBR_VERSION=$EIN_VERSION
 
-RUN fake-python-package . 'meinconf' \
+RUN fake-python-package . 'ein' \
  && pip install -e .
 
 ADD pytest.ini tox.ini ./
-ADD meinconf meinconf
+ADD ein ein
 ADD tests tests
 
 CMD ["tox"]

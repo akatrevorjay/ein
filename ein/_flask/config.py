@@ -7,7 +7,7 @@ import types
 import os
 import errno
 from six import string_types, iteritems
-from meinconf import utils
+from ein import utils
 
 
 class ConfigAttribute(object):

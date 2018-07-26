@@ -1,19 +1,16 @@
-import six
-import types
 import json
 import os
-import warnings
-import weakref
+import types
+
+import attr
+import six
+
+from ein import _flask, utils
 
 try:
     from shlex import quote
 except ImportError:
     from pipes import quote
-
-import attr
-
-from meinconf import utils, _flask
-
 
 DEFAULT_ENV_FILE = '.env'
 DEFAULT_CONFIG_MODULE_NAME = '{app_name}.default_config'
@@ -26,13 +23,17 @@ class Config(_flask.Config):
     Configuration object.
     """
 
-    app_name = attr.ib(default=attr.Factory(
-        lambda self: os.environ[APP_NAME_ENVVAR],
-        takes_self=True,
-    ))
-    root_path = attr.ib(default=attr.Factory(
-        lambda: os.path.abspath(os.curdir),
-    ))
+    app_name = attr.ib(
+        default=attr.Factory(
+            lambda self: os.environ[APP_NAME_ENVVAR],
+            takes_self=True,
+        )
+    )
+    root_path = attr.ib(
+        default=attr.Factory(
+            lambda: os.path.abspath(os.curdir),
+        )
+    )
     defaults = attr.ib(default=attr.Factory(dict))
 
     def __attrs_post_init__(self):
@@ -40,8 +41,15 @@ class Config(_flask.Config):
 
     """ Generic """
 
-    def configure(self, configfile=None, envfile=True, envvar=True, default_config=True,
-                  from_envvars=True, from_envvars_prefix=None):
+    def configure(
+            self,
+            configfile=None,
+            envfile=True,
+            envvar=True,
+            default_config=True,
+            from_envvars=True,
+            from_envvars_prefix=None
+    ):
         """
         Loads the configuration in a multitude of configurable manners
         into this configuration object.
@@ -108,7 +116,9 @@ class Config(_flask.Config):
             else:
                 return
 
-    def from_any(self, obj, as_json=True, as_py=True, as_file=True, silent=False):
+    def from_any(
+            self, obj, as_json=True, as_py=True, as_file=True, silent=False
+    ):
         """
         Magic function that tries everything it can to get configuration out
         of ``obj``, whether that's a JSON or Python string or filename.
@@ -145,7 +155,9 @@ class Config(_flask.Config):
             return False
         else:
             raise RuntimeError(
-                "Could not parse obj=%s as_json=%s as_py=%s as_file=%s" % (obj, as_json, as_py, as_file))
+                "Could not parse obj=%s as_json=%s as_py=%s as_file=%s" %
+                (obj, as_json, as_py, as_file)
+            )
 
     """ Get/set item by attribute lookup """
 
@@ -235,7 +247,9 @@ class Config(_flask.Config):
                 raise
         return self.from_object(m)
 
-    def from_envvar(self, key, as_json=True, as_py=True, as_file=True, silent=False):
+    def from_envvar(
+            self, key, as_json=True, as_py=True, as_file=True, silent=False
+    ):
         """
         Loads configuration from environment variable. This is handed into from_any.
 
@@ -260,7 +274,9 @@ class Config(_flask.Config):
             else:
                 raise e
 
-        return self.from_any(val, as_json=as_json, as_file=as_file, as_py=as_py, silent=silent)
+        return self.from_any(
+            val, as_json=as_json, as_file=as_file, as_py=as_py, silent=silent
+        )
 
     def from_envvars(self, prefix=None, envvars=None, as_json=True):
         """
@@ -288,8 +304,11 @@ class Config(_flask.Config):
             envvars = {k: None for k in envvars}
 
         if not envvars:
-            envvars = {k: k[len(prefix):] for k in os.environ.keys()
-                       if k.startswith(prefix)}
+            envvars = {
+                k: k[len(prefix):]
+                for k in os.environ.keys()
+                if k.startswith(prefix)
+            }
 
         mapping = {}
         for env_name, name in six.iteritems(envvars):
@@ -385,4 +404,3 @@ class Config(_flask.Config):
 
     def as_dict(self):
         return {k: v for k, v in self.items() if k.isupper()}
-

@@ -2,7 +2,7 @@ import pytest
 import mock
 import json
 
-import meinconf
+import ein
 
 
 class TestConfig(object):
@@ -24,7 +24,7 @@ class TestConfig(object):
     root_path = '.'
 
     def _factory(self):
-        return meinconf.Config(self.app_name, root_path=self.root_path)
+        return ein.Config(self.app_name, root_path=self.root_path)
 
     @pytest.fixture(scope='function', autouse=True)
     def c(self):
@@ -36,7 +36,7 @@ class TestConfig(object):
         assert c.as_dict() == self.end_environ
 
     @mock.patch.dict('os.environ', {config_var: 'nonce'}, clear=True)
-    @mock.patch.object(meinconf.Config, 'from_any')
+    @mock.patch.object(ein.Config, 'from_any')
     def test_from_envvar(self, mock_func, c):
         var = '%s_CONFIG' % self.app_name.upper()
         c.from_envvar(var)
@@ -63,7 +63,7 @@ class TestFlaskConfig(object):
         root_path = app.root_path
         defaults = app.config
 
-        config = meinconf.FlaskConfig(
+        config = ein.FlaskConfig(
             app=app,
         )
 
@@ -81,7 +81,7 @@ class TestFlaskConfig(object):
         root_path = 'overridden_root_path'
         defaults = {'CONFIG_OVERRIDE': True}
 
-        config = meinconf.FlaskConfig(
+        config = ein.FlaskConfig(
             app=app,
             app_name=app_name,
             root_path=root_path,
